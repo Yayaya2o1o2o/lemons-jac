@@ -8,6 +8,7 @@ def:pub app -> JsxElement {
     has picks: list[Research] = [],
         market: str = "",
         bankroll: str = "100",
+        error: str = "",
         busy: bool = False;
 
     can with entry {
@@ -94,6 +95,19 @@ def:pub app -> JsxElement {
                     </button>
                 </form>
 
+                {<p
+                    style={{
+                        "color": "#a04a2c",
+                        "backgroundColor": "#f7e7df",
+                        "border": "1px solid #e8cdc0",
+                        "borderRadius": "10px",
+                        "padding": "0.75rem 1rem",
+                        "margin": "0 0 2rem"
+                    }}
+                >
+                    {error}
+                </p> if error else None}
+
                 {[
                     <PickCard
                         key={idx}
@@ -106,7 +120,7 @@ def:pub app -> JsxElement {
                         angles={p.angles}
                         risks={p.risks}
                     />
-                    for (idx, p) in enumerate(picks[::-1])
+                    for (idx, p) in enumerate(picks)
                 ]}
             </div>
         </div>;
